@@ -1,0 +1,6 @@
+.npm-cache/
+**/bin/
+**/obj/
+**/.vscode
+**/node_modules/
+**/dist/

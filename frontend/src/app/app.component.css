@@ -1,0 +1,442 @@
+:host {
+  display: block;
+  font-family: 'Outfit', sans-serif;
+  color: #f3f4f6;
+  min-height: 100vh;
+}
+
+/* Background blob aesthetics */
+.background-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #0b0f19;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  z-index: 1;
+  pointer-events: none;
+  animation: float 20s infinite alternate;
+}
+
+.blob-purple {
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+  top: -10%;
+  left: -10%;
+}
+
+.blob-cyan {
+  width: 600px;
+  height: 600px;
+  background: linear-gradient(135deg, #06b6d4, #3b82f6);
+  bottom: -10%;
+  right: -10%;
+  animation-delay: -5s;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(5%, 10%) scale(1.1);
+  }
+  100% {
+    transform: translate(-5%, -5%) scale(0.9);
+  }
+}
+
+/* Main Dashboard Card (Glassmorphism) */
+.dashboard-card {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 540px;
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Header */
+.app-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.header-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(135deg, #38bdf8, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.badge {
+  background: rgba(129, 140, 248, 0.15);
+  border: 1px solid rgba(129, 140, 248, 0.3);
+  color: #a5b4fc;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #9ca3af;
+  margin: 0;
+  font-weight: 300;
+}
+
+/* Progress Section */
+.progress-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 1.25rem;
+  border-radius: 16px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-label {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.progress-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+.progress-bar-container {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8, #818cf8);
+  border-radius: 9999px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.active-tasks-count {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin: 0.25rem 0 0 0;
+}
+
+/* Input Form */
+.input-form {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.input-wrapper {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  color: #6b7280;
+  pointer-events: none;
+  font-size: 1.25rem;
+}
+
+.input-form input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1rem 1rem 1rem 3rem;
+  color: #f3f4f6;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input-form input:focus {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
+}
+
+.btn-add {
+  background: linear-gradient(135deg, #38bdf8, #818cf8);
+  border: none;
+  border-radius: 16px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.btn-add:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(129, 140, 248, 0.4);
+}
+
+.btn-add:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0.35rem;
+  border-radius: 14px;
+}
+
+.filters button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  padding: 0.6rem 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  font-family: inherit;
+}
+
+.filters button:hover:not(.active) {
+  color: #f3f4f6;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.filters button.active {
+  background: rgba(255, 255, 255, 0.08);
+  color: #38bdf8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.counter {
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #f3f4f6;
+  padding: 0.1rem 0.4rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.filters button.active .counter {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+}
+
+/* Todo List */
+.todo-list-section {
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+/* Scrollbar styling */
+.todo-list-section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.todo-list-section::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.todo-list-section::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+}
+
+.todo-list-section::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 0.85rem 1.25rem;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.todo-item:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-check {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.btn-check:hover {
+  color: #38bdf8;
+}
+
+.icon-checkmark {
+  font-size: 1.35rem;
+}
+
+.todo-title {
+  flex-grow: 1;
+  font-size: 0.95rem;
+  color: #e5e7eb;
+  transition: all 0.3s ease;
+  word-break: break-word;
+}
+
+.todo-item.completed .todo-title {
+  text-decoration: line-through;
+  color: #6b7280;
+}
+
+.todo-item.completed .btn-check {
+  color: #10b981;
+}
+
+.btn-delete {
+  background: transparent;
+  border: none;
+  color: #4b5563;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.btn-delete span {
+  font-size: 1.25rem;
+}
+
+.todo-item:hover .btn-delete {
+  opacity: 1;
+}
+
+.btn-delete:hover {
+  color: #ef4444;
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  text-align: center;
+  padding: 2rem 0;
+  color: #6b7280;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  color: #3b82f6;
+  opacity: 0.4;
+}
+
+.empty-state h3 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.empty-state p {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Footer styling */
+.app-footer {
+  text-align: center;
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 1.5rem;
+}
+
+.app-footer p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #4b5563;
+  letter-spacing: 0.5px;
+}

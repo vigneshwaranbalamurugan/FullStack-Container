@@ -1,0 +1,99 @@
+<div class="background-container">
+  <div class="blob blob-purple"></div>
+  <div class="blob blob-cyan"></div>
+  
+  <main class="dashboard-card">
+    <header class="app-header">
+      <div class="header-main">
+        <h1>Taskflow</h1>
+        <span class="badge">Aesthetic Todo</span>
+      </div>
+      <p class="subtitle">Streamline your day, elevate your productivity</p>
+    </header>
+
+    <!-- Progress Tracker -->
+    <section class="progress-section">
+      <div class="progress-info">
+        <span class="progress-label">Task Completion</span>
+        <span class="progress-value">{{ completionPercentage }}%</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" [style.width.%]="completionPercentage"></div>
+      </div>
+      <p class="active-tasks-count" *ngIf="todos.length > 0">
+        {{ activeCount }} {{ activeCount === 1 ? 'task' : 'tasks' }} left to complete
+      </p>
+    </section>
+
+    <!-- Input Form -->
+    <section class="input-section">
+      <form (submit)="addTodo()" class="input-form">
+        <div class="input-wrapper">
+          <span class="material-symbols-outlined input-icon">add_task</span>
+          <input 
+            type="text" 
+            [(ngModel)]="newTodoTitle" 
+            name="newTodo" 
+            placeholder="Create a new task..." 
+            autocomplete="off"
+            required
+          />
+        </div>
+        <button type="submit" [disabled]="!newTodoTitle.trim()" class="btn-add">
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- Filters -->
+    <section class="filter-section">
+      <div class="filters">
+        <button [class.active]="filter === 'all'" (click)="filter = 'all'">
+          All <span class="counter">{{ todos.length }}</span>
+        </button>
+        <button [class.active]="filter === 'active'" (click)="filter = 'active'">
+          Active <span class="counter">{{ activeCount }}</span>
+        </button>
+        <button [class.active]="filter === 'completed'" (click)="filter = 'completed'">
+          Completed <span class="counter">{{ todos.length - activeCount }}</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Todo List -->
+    <section class="todo-list-section">
+      <div class="todo-list" *ngIf="filteredTodos.length > 0">
+        <div 
+          *ngFor="let todo of filteredTodos" 
+          class="todo-item" 
+          [class.completed]="todo.isCompleted"
+        >
+          <button class="btn-check" (click)="toggleComplete(todo)" aria-label="Toggle completed">
+            <span class="material-symbols-outlined icon-checkmark">
+              {{ todo.isCompleted ? 'check_circle' : 'radio_button_unchecked' }}
+            </span>
+          </button>
+          
+          <span class="todo-title">{{ todo.title }}</span>
+          
+          <button class="btn-delete" (click)="deleteTodo(todo)" aria-label="Delete todo">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" *ngIf="filteredTodos.length === 0">
+        <span class="material-symbols-outlined empty-icon">assignment_late</span>
+        <h3>No tasks found</h3>
+        <p>
+          {{ filter === 'all' ? 'Add a task to get started!' : 'No tasks match the active filter.' }}
+        </p>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <p>Angular &middot; .NET Web API &middot; PostgreSQL</p>
+    </footer>
+  </main>
+</div>

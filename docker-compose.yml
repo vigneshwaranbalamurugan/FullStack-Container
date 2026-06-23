@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: todo-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: todo_user
+      POSTGRES_PASSWORD: todo_password
+      POSTGRES_DB: todo_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: todo-backend
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=todo_db;Username=todo_user;Password=todo_password
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5039:5039"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: todo-frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "4200:4200"
+
+volumes:
+  postgres_data:
