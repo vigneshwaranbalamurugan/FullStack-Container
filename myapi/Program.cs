@@ -21,7 +21,7 @@ app.MapGet("/health", () =>
 
 app.MapGet("/", () =>
 {
-    return Results.Ok(new { message = "API is running", version = "1.0" });
+    return Results.Ok(new { message = "API is running", version = "2.0" });
 });
 
 app.MapGet("/db-check", async () =>
